@@ -21,7 +21,7 @@ Route::post('/register','AuthController@register');
 Route::post('/login','AuthController@login');
 
 Route::get('/articles', 'ArticleController@index');
-Route::get('/articles/{search}', 'ArticleController@search');
+Route::get('/articles/{search_term}', 'ArticleController@search');
 Route::get('/article/{article_id}', 'ArticleController@show');
 Route::put('/article/{article_id}/rating', 'ArticleController@rateArticle');
 

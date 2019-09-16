@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Article;
 use App\Article_Rating;
@@ -15,6 +16,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
+
         $res = Article::all();
         return $res;
     }
@@ -89,7 +91,17 @@ class ArticleController extends Controller
     }
 
     public function search($search_term){
-
+        $article = Article::query()->whereLike('subject', $search_term)
+            ->whereLike('author', $search_term)
+            ->whereLike('body', $search_term)->get();
+        $count = count($article);
+        
+        if($count == 0){
+            return response(['message'=>'success'
+            , 'code'=>200,'data'=>'No result found']);
+        }
+        return response(['message'=>'success'
+            , 'code'=>200,'data'=>$article]);
     }
 
     /**

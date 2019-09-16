@@ -21,7 +21,7 @@ Below is a list of dependencies that is required for this application to run suc
 **Composer**
 **Laravel**
 
-## How To Run Aricle
+## How To Run Article
 
 # Steps:
 
@@ -30,4 +30,4 @@ Below is a list of dependencies that is required for this application to run suc
 3. run: docker up -d.
 4. Visit localhost:8181 This should open the laravel default page
 
--   To access APIs goto: localhost:8181/api/['The API name']
+-   To access APIs goto: localhost:8181/api/api_name
