@@ -22,7 +22,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     *  Rating an article.
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $article_id
      * @return \Illuminate\Http\Response
@@ -32,7 +32,7 @@ class ArticleController extends Controller
         // Instantiate rating object
         $rating = new Article_Rating;
         //Assign values ti the rating table fields
-        $rating->rating=$request->input('id');
+        $rating->article_id=$article_id;
         $rating->rating=$request->input('rating');
         // Save 
         $res = $rating->save();
@@ -47,19 +47,22 @@ class ArticleController extends Controller
             // Get count of total rating
             $count = count($new_rate);
 
-            $rating_value = $sum/$count;
+            $rating_value=$request->input('rating');
 
-            // Update rating field in article's table
             $articles =Article::find($article_id);
+            if(!$count == 0){
+                $rating_value = $sum/$count;
+            }
+            // Update rating field in article's table
 
             $articles->rating=$rating_value;
 
             //Update article
             $articles->save();
-            
-            $data = Article::orderBy('created_at','desc')->take(1)->get(); 
+
+            $data = Article::orderBy('updated_at','desc')->take(1)->get(); 
             return response(['message'=>'success'
-            , 'code'=>200,'data'=>$res]);
+            , 'code'=>200,'data'=>$data]);
         }else {
             return response(['Error'=>
             'Error occured when trying to perform rate action',
@@ -111,7 +114,7 @@ class ArticleController extends Controller
             , 'code'=>200,'data'=>$article]);  
     }
     /**
-     * Display the specified resource.
+     * Display the search result.
      *
      * @param  int  $search_term
      * @return \Illuminate\Http\Response
