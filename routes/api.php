@@ -23,7 +23,7 @@ Route::post('/login','AuthController@login');
 Route::get('/articles', 'ArticleController@index');
 Route::get('/articles/{search_term}', 'ArticleController@search');
 Route::get('/article/{article_id}', 'ArticleController@show');
-Route::put('/article/{article_id}/rating', 'ArticleController@rateArticle');
+Route::post('/article/{article_id}/rating', 'ArticleController@rateArticle');
 
 Route::group(['middleware'=>'auth:api'],function(){
 Route::post('/article', 'ArticleController@store');

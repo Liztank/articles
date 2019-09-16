@@ -29,14 +29,35 @@ class ArticleController extends Controller
      */
     public function rateArticle(Request $request, $article_id)
     {
-        $rating =Article::find($article_id);
-        $rating->rated_by=auth()->user()->id;
+        // Instantiate rating object
+        $rating = new Article_Rating;
+        //Assign values ti the rating table fields
         $rating->rating=$request->input('id');
         $rating->rating=$request->input('rating');
+        // Save 
+        $res = $rating->save();
 
-        $res = Article_Rating::create($article);
+        if($res !==null){
+            $new_rate = $rating::where('article_id',$article_id)->get();
+            // Calculate rating
+            $sum = 0;
+            foreach ($new_rate as $rate) {
+                $sum = $sum + $rate['rating'];
+            }
+            // Get count of total rating
+            $count = count($new_rate);
 
-        if($res['id']!==null){
+            $rating_value = $sum/$count;
+
+            // Update rating field in article's table
+            $articles =Article::find($article_id);
+
+            $articles->rating=$rating_value;
+
+            //Update article
+            $articles->save();
+            
+            $data = Article::orderBy('created_at','desc')->take(1)->get(); 
             return response(['message'=>'success'
             , 'code'=>200,'data'=>$res]);
         }else {
@@ -89,13 +110,18 @@ class ArticleController extends Controller
         return response(['message'=>'success'
             , 'code'=>200,'data'=>$article]);  
     }
-
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $search_term
+     * @return \Illuminate\Http\Response
+     */
     public function search($search_term){
         $article = Article::query()->whereLike('subject', $search_term)
             ->whereLike('author', $search_term)
             ->whereLike('body', $search_term)->get();
         $count = count($article);
-        
+
         if($count == 0){
             return response(['message'=>'success'
             , 'code'=>200,'data'=>'No result found']);
