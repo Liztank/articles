@@ -27,13 +27,13 @@ You can run this project using either of the two steps:
 
 # Step: 1
 
-Run: docker run -it liztank/article-backend-services:latest
+Run: `docker run -it liztank/article-backend-services:latest`
 
 # Step: 2
 
-1. Clone the project ['article']('https://github.com/Liztank/articles.git') to your working directory.
+1. Clone the project [article]('https://github.com/Liztank/articles.git') to your working directory.
 2. Navigate to the project folder
-3. Run: docker up -d or docker-compose -f 'docker-compose.yaml' up -d --build
+3. Run: `docker up -d` or `docker-compose -f 'docker-compose.yaml' up -d --build`
 4. Visit localhost:8181 This should open the laravel default page
 
 ## Articles
