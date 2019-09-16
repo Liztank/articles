@@ -96,7 +96,7 @@ class ArticleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $article_id Unique identification number or string
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $article_id)
