@@ -7,7 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-## About Article
+# About Article
 
 Article is a simple backend application built with laravel. It consist of APIs that performs basic CRUD and some other few functionalities such as search etc.
 
@@ -15,22 +15,28 @@ Article is a simple backend application built with laravel. It consist of APIs t
 
 Below is a list of dependencies that is required for this application to run successfull:
 
-**PHP-7 and PHP-Server e.g XAMPP,LAMP,MAMP** which ever serves you best
-**Docker**
-**MYSQL.** MYSQL is embeded in the php server
-**Composer**
-**Laravel**
+-   **PHP-7 and PHP-Server e.g XAMPP,LAMP,MAMP** which ever serves you best
+-   **Docker**
+-   **MYSQL.** MYSQL is embeded in the php server
+-   **Composer**
+-   **Laravel**
 
 ## How To Run Article
 
-# Steps:
+You can run this project using either of the two steps:
+
+# Step: 1
+
+Run: docker run -it liztank/article-backend-services:latest
+
+# Step: 2
 
 1. Clone the project ['article']('https://github.com/Liztank/articles.git') to your working directory.
 2. Navigate to the project folder
-3. run: docker up -d.
+3. Run: docker up -d or docker-compose -f 'docker-compose.yaml' up -d --build
 4. Visit localhost:8181 This should open the laravel default page
 
-### Articles
+## Articles
 
 | Action | Method   | URL                          | Authentication |
 | ------ | -------- | ---------------------------- | -------------- |
